@@ -1,4 +1,4 @@
-io.github.balaelangovan.config.LoggingAutoConfiguration
-io.github.balaelangovan.config.SecurityAutoConfiguration
-io.github.balaelangovan.config.ExceptionAutoConfiguration
-io.github.balaelangovan.config.AsyncAutoConfiguration
+io.github.balaelangovan.spring.webmvc.starter.config.LoggingAutoConfiguration
+io.github.balaelangovan.spring.webmvc.starter.config.SecurityAutoConfiguration
+io.github.balaelangovan.spring.webmvc.starter.config.ExceptionAutoConfiguration
+io.github.balaelangovan.spring.webmvc.starter.config.AsyncAutoConfiguration
