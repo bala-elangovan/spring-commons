@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <!-- Property definitions -->
+    <Properties>
+        <!-- Define internal properties with different names to avoid circular references -->
+        <Property name="APP_LOG_PATH">${spring:logging.file.path:-${sys:java.io.tmpdir}}/logs</Property>
+        <Property name="APP_LOG_FILE">${spring:logging.file.name:-application}</Property>
+
+        <!-- Console pattern for colored output (local/dev) - Use ANSI colors -->
+        <Property name="CONSOLE_LOG_PATTERN_COLOR">%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight{%-5level}{FATAL=red, ERROR=red, WARN=yellow, INFO=green, DEBUG=cyan, TRACE=blue} [%t] %style{%-40.40logger{39}}{cyan} : %m%n%ex</Property>
+
+        <!-- Console pattern for plain output (prod) -->
+        <Property name="CONSOLE_LOG_PATTERN_PLAIN">%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%t] %-40.40logger{39} : %m%n%ex</Property>
+
+        <!-- File pattern with MDC -->
+        <Property name="FILE_LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%t] %-40.40logger{39} %X{transactionId} %X{userId} %X{requestId} : %m%n%ex</Property>
+    </Properties>
+
+    <Appenders>
+        <!-- Console Appender for local/dev profiles with colors -->
+        <Console name="ConsoleColor" target="SYSTEM_OUT">
+            <PatternLayout pattern="${CONSOLE_LOG_PATTERN_COLOR}" disableAnsi="false"/>
+        </Console>
+
+        <!-- Console Appender for production profiles without colors -->
+        <Console name="ConsolePlain" target="SYSTEM_OUT">
+            <PatternLayout pattern="${CONSOLE_LOG_PATTERN_PLAIN}"/>
+        </Console>
+
+        <!-- Rolling File Appender -->
+        <RollingFile name="RollingFile"
+                     fileName="${APP_LOG_PATH}/${APP_LOG_FILE}.log"
+                     filePattern="${APP_LOG_PATH}/${APP_LOG_FILE}-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout pattern="${FILE_LOG_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="30">
+                <Delete basePath="${APP_LOG_PATH}" maxDepth="1">
+                    <IfFileName glob="${APP_LOG_FILE}-*.log.gz"/>
+                    <IfLastModified age="30d"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+        <!-- Async Appender for better performance -->
+        <Async name="AsyncFile">
+            <AppenderRef ref="RollingFile"/>
+        </Async>
+    </Appenders>
+
+    <Loggers>
+        <!-- Platform Commons library logging -->
+        <Logger name="io.github.balaelangovan" level="DEBUG" additivity="false">
+            <AppenderRef ref="ConsoleColor"/>
+        </Logger>
+
+        <!-- Spring Framework logging -->
+        <Logger name="org.springframework" level="INFO"/>
+        <Logger name="org.springframework.web" level="INFO"/>
+        <Logger name="org.springframework.security" level="INFO"/>
+        <Logger name="org.springframework.boot.actuate" level="INFO"/>
+
+        <!-- Reactor logging (for WebFlux) -->
+        <Logger name="reactor.netty" level="INFO"/>
+        <Logger name="io.netty" level="INFO"/>
+
+        <!-- Database/JPA logging -->
+        <Logger name="org.hibernate" level="WARN"/>
+        <Logger name="org.hibernate.SQL" level="DEBUG"/>
+        <Logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE"/>
+
+        <!-- HTTP Client logging -->
+        <Logger name="org.apache.http" level="INFO"/>
+        <Logger name="org.springframework.web.client" level="DEBUG"/>
+        <Logger name="org.springframework.web.reactive.function.client" level="DEBUG"/>
+
+        <!-- Root logger - profile specific -->
+        <Root level="INFO">
+            <!-- Default to colored console for development -->
+            <AppenderRef ref="ConsoleColor"/>
+        </Root>
+    </Loggers>
+
+    <!-- Spring Profile-specific configurations -->
+    <SpringProfile name="local,dev">
+        <Loggers>
+            <Root level="INFO">
+                <AppenderRef ref="ConsoleColor"/>
+            </Root>
+        </Loggers>
+    </SpringProfile>
+
+    <SpringProfile name="!local &amp; !dev">
+        <Loggers>
+            <Root level="INFO">
+                <AppenderRef ref="ConsolePlain"/>
+                <AppenderRef ref="AsyncFile"/>
+            </Root>
+        </Loggers>
+    </SpringProfile>
+</Configuration>

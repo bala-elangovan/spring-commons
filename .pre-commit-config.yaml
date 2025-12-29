@@ -29,17 +29,6 @@ repos:
         pass_filenames: false
         always_run: true
 
-  # Kotlin formatting with ktlint (removes unused imports)
-  - repo: local
-    hooks:
-      - id: ktlint-format
-        name: ktlint format
-        description: Format Kotlin files with ktlint and remove unused imports
-        entry: .githooks/ktlint-format.sh
-        language: system
-        files: \.kt(s)?$
-        pass_filenames: true
-
   # Gradle wrapper validation
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0

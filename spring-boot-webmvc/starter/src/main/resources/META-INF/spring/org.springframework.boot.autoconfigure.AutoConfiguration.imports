@@ -1,4 +1,0 @@
-io.github.platform.commons.config.LoggingAutoConfiguration
-io.github.platform.commons.config.SecurityAutoConfiguration
-io.github.platform.commons.config.ExceptionAutoConfiguration
-io.github.platform.commons.config.AsyncAutoConfiguration

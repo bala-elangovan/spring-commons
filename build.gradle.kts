@@ -1,14 +1,13 @@
 plugins {
-    kotlin("jvm") version "2.2.20" apply false
-    kotlin("plugin.spring") version "2.2.20" apply false
-    id("io.github.platform.java-conventions") version "1.0.0" apply false
-    id("io.github.platform.spring-conventions") version "1.0.0" apply false
-    id("io.github.platform.spring-test-conventions") version "1.0.0" apply false
+    alias(libs.plugins.kotlin.jvm) apply false
+    alias(libs.plugins.kotlin.spring) apply false
+    alias(libs.plugins.java.conventions) apply false
+    alias(libs.plugins.spring.test.conventions) apply false
     `maven-publish`
 }
 
 allprojects {
-    group = "io.github.platform"
+    group = "io.github.balaelangovan"
     version = "1.0.0"
 
     repositories {
@@ -38,36 +37,8 @@ subprojects {
                 publications {
                     create<MavenPublication>("mavenJava") {
                         from(components["java"])
-
                         // Use full module path as artifactId to avoid conflicts
                         artifactId = project.path.substring(1).replace(":", "-")
-
-                        pom {
-                            name.set(project.name)
-                            description.set(project.description ?: "Platform Commons - ${project.name}")
-                            url.set("https://github.com/bala-lab-projects/platform-commons")
-
-                            licenses {
-                                license {
-                                    name.set("MIT License")
-                                    url.set("https://opensource.org/licenses/MIT")
-                                }
-                            }
-
-                            developers {
-                                developer {
-                                    id.set("bala-lab-projects")
-                                    name.set("Balamurugan Elangovan")
-                                    email.set("mail.bala0224@gmail.com")
-                                }
-                            }
-
-                            scm {
-                                connection.set("scm:git:git://github.com/bala-lab-projects/platform-commons.git")
-                                developerConnection.set("scm:git:ssh://github.com/bala-lab-projects/platform-commons.git")
-                                url.set("https://github.com/bala-lab-projects/platform-commons")
-                            }
-                        }
                     }
                 }
             }

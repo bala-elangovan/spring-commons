@@ -1,0 +1,101 @@
+# Version catalog for spring-commons
+# All dependencies are defined here for consistency
+# Dependencies without version.ref are managed by Spring Boot BOM
+
+[versions]
+# Core versions
+kotlin = "2.2.20"
+spring-boot = "4.0.1"
+gradle-plugins = "1.0.0"
+
+# API Documentation
+swagger-annotations = "2.2.41"
+springdoc = "3.0.0"
+
+# Logging - explicit versions for proper Maven publishing
+slf4j = "2.0.17"
+log4j2 = "2.25.3"
+
+[libraries]
+# =============================================================================
+# Spring Boot Starters (versions managed by Spring Boot BOM)
+# =============================================================================
+spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web", version.ref = "spring-boot" }
+spring-boot-starter-webflux = { module = "org.springframework.boot:spring-boot-starter-webflux", version.ref = "spring-boot" }
+spring-boot-starter-validation = { module = "org.springframework.boot:spring-boot-starter-validation", version.ref = "spring-boot" }
+spring-boot-starter-log4j2 = { module = "org.springframework.boot:spring-boot-starter-log4j2", version.ref = "spring-boot" }
+spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test", version.ref = "spring-boot" }
+spring-boot-starter-security = { module = "org.springframework.boot:spring-boot-starter-security", version.ref = "spring-boot" }
+spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator", version.ref = "spring-boot" }
+
+# =============================================================================
+# Spring Boot Autoconfigure & Processors
+# =============================================================================
+spring-boot-autoconfigure = { module = "org.springframework.boot:spring-boot-autoconfigure", version.ref = "spring-boot" }
+spring-boot-autoconfigure-processor = { module = "org.springframework.boot:spring-boot-autoconfigure-processor", version.ref = "spring-boot" }
+spring-boot-configuration-processor = { module = "org.springframework.boot:spring-boot-configuration-processor", version.ref = "spring-boot" }
+
+# =============================================================================
+# Spring Boot Test
+# =============================================================================
+spring-boot-webmvc-test = { module = "org.springframework.boot:spring-boot-webmvc-test", version.ref = "spring-boot" }
+spring-boot-webflux-test = { module = "org.springframework.boot:spring-boot-webflux-test", version.ref = "spring-boot" }
+spring-boot-webclient-test = { module = "org.springframework.boot:spring-boot-webclient-test", version.ref = "spring-boot" }
+spring-boot-restclient-test = { module = "org.springframework.boot:spring-boot-restclient-test", version.ref = "spring-boot" }
+
+# =============================================================================
+# Spring Framework & Spring Data (versions managed by Spring Boot BOM - no version specified)
+# =============================================================================
+spring-context = { module = "org.springframework:spring-context" }
+spring-web = { module = "org.springframework:spring-web" }
+spring-data-commons = { module = "org.springframework.data:spring-data-commons" }
+spring-security-test = { module = "org.springframework.security:spring-security-test" }
+
+# =============================================================================
+# Kotlin
+# =============================================================================
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
+kotlinx-coroutines-reactor = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-reactor" }
+
+# =============================================================================
+# Jackson (versions managed by Spring Boot BOM - no version specified)
+# =============================================================================
+jackson-module-kotlin = { module = "tools.jackson.module:jackson-module-kotlin" }
+jackson-databind = { module = "tools.jackson.core:jackson-databind" }
+jackson-annotations = { module = "com.fasterxml.jackson.core:jackson-annotations" }
+
+# =============================================================================
+# Reactor (versions managed by Spring Boot BOM - no version specified)
+# =============================================================================
+reactor-kotlin-extensions = { module = "io.projectreactor.kotlin:reactor-kotlin-extensions" }
+reactor-test = { module = "io.projectreactor:reactor-test" }
+
+# =============================================================================
+# Other (versions managed by Spring Boot BOM - no version specified)
+# =============================================================================
+aspectjweaver = { module = "org.aspectj:aspectjweaver" }
+commons-lang3 = { module = "org.apache.commons:commons-lang3" }
+micrometer-core = { module = "io.micrometer:micrometer-core" }
+jakarta-validation-api = { module = "jakarta.validation:jakarta.validation-api" }
+
+# =============================================================================
+# API Documentation
+# =============================================================================
+swagger-annotations = { module = "io.swagger.core.v3:swagger-annotations", version.ref = "swagger-annotations" }
+springdoc-openapi-webmvc = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springdoc" }
+springdoc-openapi-webflux = { module = "org.springdoc:springdoc-openapi-starter-webflux-ui", version.ref = "springdoc" }
+
+# =============================================================================
+# Logging - explicit versions for consumer apps
+# =============================================================================
+slf4j-api = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
+log4j2-api = { module = "org.apache.logging.log4j:log4j-api", version.ref = "log4j2" }
+log4j2-core = { module = "org.apache.logging.log4j:log4j-core", version.ref = "log4j2" }
+log4j2-slf4j2-impl = { module = "org.apache.logging.log4j:log4j-slf4j2-impl", version.ref = "log4j2" }
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
+java-conventions = { id = "io.github.balaelangovan.java-conventions", version.ref = "gradle-plugins" }
+spring-test-conventions = { id = "io.github.balaelangovan.spring-test-conventions", version.ref = "gradle-plugins" }

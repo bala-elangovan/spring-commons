@@ -1,6 +1,6 @@
 # Architecture Decision Records (ADRs)
 
-This directory contains Architecture Decision Records (ADRs) for Platform Commons.
+This directory contains Architecture Decision Records (ADRs) for Spring Commons.
 
 ## What is an ADR?
 
@@ -32,7 +32,7 @@ Each ADR should include:
 ADRs are numbered sequentially:
 ```
 000-template.md
-001-platform-commons-library.md
+001-spring-commons-library.md
 002-next-decision.md
 ...
 ```
@@ -49,7 +49,7 @@ ADRs are numbered sequentially:
 
 | # | Title | Status | Date |
 |---|-------|--------|------|
-| [001](./001-platform-commons-library.md) | Platform Commons Library for Cross-Cutting Concerns | Accepted | 2025-11-02 |
+| [001](./001-spring-commons-library.md) | Spring Commons Library for Cross-Cutting Concerns | Accepted | 2025-11-02 |
 
 ## References
 

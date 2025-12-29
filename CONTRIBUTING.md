@@ -1,6 +1,6 @@
-# Contributing to Platform Commons
+# Contributing to Spring Commons
 
-Thank you for considering contributing to Platform Commons! This document provides guidelines and instructions for contributing to this project.
+Thank you for considering contributing to Spring Commons! This document provides guidelines and instructions for contributing to this project.
 
 ## Table of Contents
 
@@ -36,8 +36,8 @@ Thank you for considering contributing to Platform Commons! This document provid
 ```bash
 # Fork the repository on GitHub
 # Then clone your fork
-git clone https://github.com/YOUR_USERNAME/platform-commons.git
-cd platform-commons
+git clone https://github.com/YOUR_USERNAME/spring-commons.git
+cd spring-commons
 ```
 
 ## Development Setup
@@ -226,7 +226,7 @@ fun `should return user when user exists`() {
 make test
 
 # Run tests for specific module
-./gradlew :spring-core:test
+./gradlew :spring:core:test
 
 # Run with coverage
 ./gradlew test jacocoTestReport
@@ -385,19 +385,19 @@ See [ADR documentation](./docs/decisions/README.md) for details.
 
 ## Module-Specific Guidelines
 
-### spring-core
+### spring/core
 
 - Keep framework-agnostic
 - No WebMVC or WebFlux specific code
 - Focus on shared components
 
-### spring-boot-webmvc
+### spring/boot-webmvc
 
 - Use servlet-based APIs
 - No reactive types (Mono/Flux)
 - Use `HttpServletRequest`/`HttpServletResponse`
 
-### spring-boot-webflux
+### spring/boot-webflux
 
 - Use reactive types (Mono/Flux)
 - Never block (no `.block()` calls)
@@ -432,4 +432,4 @@ By contributing, you agree that your contributions will be licensed under the pr
 
 ---
 
-Thank you for contributing to Platform Commons! 🎉
+Thank you for contributing to Spring Commons!
