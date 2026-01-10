@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicReference
  * First checks the Authorization header from the request context, then generates a token if not present.
  */
 @Component
-@ConditionalOnProperty(prefix = "platform.rest-client.oauth", name = ["enabled"])
+@ConditionalOnProperty(prefix = "modules.rest-client.oauth", name = ["enabled"])
 class ReactiveOAuthTokenManager(
     private val webClient: WebClient,
     private val oAuthProperties: OAuthProperties,

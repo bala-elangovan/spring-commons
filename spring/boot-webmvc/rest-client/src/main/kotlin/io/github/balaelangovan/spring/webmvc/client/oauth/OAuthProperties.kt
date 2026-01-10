@@ -12,7 +12,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties
  * @param grantType the OAuth grant type (default: client_credentials)
  * @param scope optional OAuth scope
  */
-@ConfigurationProperties(prefix = "platform.rest-client.oauth")
+@ConfigurationProperties(prefix = "modules.rest-client.oauth")
 data class OAuthProperties(
     var enabled: Boolean = false,
     var tokenUrl: String? = null,

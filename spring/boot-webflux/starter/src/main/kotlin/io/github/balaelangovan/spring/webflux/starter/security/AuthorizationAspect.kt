@@ -146,6 +146,7 @@ class AuthorizationAspect {
         exchange: ServerWebExchange,
         authorization: Authorization,
     ): Set<String> = authorization.headerNames
+        .asSequence()
         .mapNotNull { exchange.request.headers.getFirst(it) }
         .filter { StringUtils.isNotBlank(it) }
         .flatMap { it.split(authorization.delimiter) }

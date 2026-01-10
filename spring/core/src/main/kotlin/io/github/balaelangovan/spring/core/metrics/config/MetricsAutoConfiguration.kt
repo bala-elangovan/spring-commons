@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration
  */
 @Configuration
 @ConditionalOnProperty(
-    prefix = "platform.metrics",
+    prefix = "modules.metrics",
     name = ["enabled"],
     matchIfMissing = true,
 )

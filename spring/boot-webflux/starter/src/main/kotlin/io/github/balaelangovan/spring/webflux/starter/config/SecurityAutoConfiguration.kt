@@ -14,13 +14,13 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy
  * - Scans and registers the reactive AuthorizationAspect
  * - Enables AOP proxy support for @Authorization annotation
  * - Only activates for reactive (WebFlux) applications
- * - Can be disabled via platform.security.enabled=false
+ * - Can be disabled via modules.security.enabled=false
  */
 @Configuration
 @EnableAspectJAutoProxy
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.REACTIVE)
 @ConditionalOnProperty(
-    prefix = "platform.security",
+    prefix = "modules.security",
     name = ["enabled"],
     matchIfMissing = true,
 )
