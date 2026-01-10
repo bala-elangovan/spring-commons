@@ -3,6 +3,18 @@ pluginManagement {
         mavenLocal()
         mavenCentral()
         gradlePluginPortal()
+        maven("https://jitpack.io")
+    }
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.namespace == "io.github.balaelangovan") {
+                val moduleName = when (requested.id.name) {
+                    "java-conventions" -> "java-conventions"
+                    else -> "spring-conventions" // All spring-* plugins are in spring-conventions module
+                }
+                useModule("com.github.bala-elangovan.gradle-plugins:$moduleName:v${requested.version}")
+            }
+        }
     }
 }
 

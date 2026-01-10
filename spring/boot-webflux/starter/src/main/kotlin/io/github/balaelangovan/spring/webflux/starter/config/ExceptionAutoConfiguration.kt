@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.REACTIVE)
 @ConditionalOnProperty(
-    prefix = "platform.exception-handling",
+    prefix = "modules.exception-handling",
     name = ["enabled"],
     matchIfMissing = true,
 )

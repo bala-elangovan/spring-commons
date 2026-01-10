@@ -7,12 +7,12 @@ plugins {
 }
 
 allprojects {
-    group = "io.github.balaelangovan"
-    version = "1.0.0"
+    group = "com.github.bala-elangovan"
+    version = "${property("major")}.${property("minor")}.${property("patch")}"
 
     repositories {
         mavenCentral()
-        mavenLocal()
+        maven("https://jitpack.io")
     }
 }
 

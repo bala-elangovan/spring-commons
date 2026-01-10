@@ -14,7 +14,7 @@ import org.springframework.web.client.RestTemplate
  */
 @Configuration
 @ConditionalOnProperty(
-    prefix = "platform.rest-client",
+    prefix = "modules.rest-client",
     name = ["enabled"],
     matchIfMissing = true,
 )

@@ -20,7 +20,7 @@ import java.time.Instant
  * @param oAuthProperties OAuth configuration properties
  */
 @Component
-@ConditionalOnProperty(prefix = "platform.rest-client.oauth", name = ["enabled"])
+@ConditionalOnProperty(prefix = "modules.rest-client.oauth", name = ["enabled"])
 class OAuthTokenManager(
     private val restTemplate: RestTemplate,
     private val oAuthProperties: OAuthProperties,
