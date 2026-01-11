@@ -4,6 +4,7 @@ plugins {
     kotlin("jvm")
     kotlin("plugin.spring")
     id("io.github.balaelangovan.java-conventions")
+    id("io.github.balaelangovan.spring-test-conventions")
 }
 
 repositories {
@@ -64,4 +65,8 @@ dependencies {
 
     // Validation API
     compileOnly(rootProject.libs.jakarta.validation.api)
+
+    // Test dependencies
+    testImplementation(rootProject.libs.micrometer.core)
+    testImplementation(rootProject.libs.spring.context)
 }
