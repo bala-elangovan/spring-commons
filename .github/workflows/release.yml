@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   release:
@@ -16,6 +17,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
+          ref: main
           fetch-depth: 0
 
       - name: Set up JDK 21
@@ -34,24 +36,35 @@ jobs:
       - name: Validate build
         run: ./gradlew build -Pversion=${{ steps.version.outputs.VERSION }}
 
-      - name: Get previous tag
-        id: prev_tag
-        run: |
-          PREV_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || git rev-list --max-parents=0 HEAD)
-          echo "PREV_TAG=$PREV_TAG" >> $GITHUB_OUTPUT
-
-      - name: Generate release notes
-        id: release_notes
-        run: |
-          echo "## Changes" > release_notes.md
-          echo "" >> release_notes.md
-          git log ${{ steps.prev_tag.outputs.PREV_TAG }}..HEAD --pretty=format:"- %s (%h)" >> release_notes.md
-          echo "" >> release_notes.md
-          echo "" >> release_notes.md
-          echo "## Contributors" >> release_notes.md
-          git log ${{ steps.prev_tag.outputs.PREV_TAG }}..HEAD --pretty=format:"%an" | sort -u | sed 's/^/- /' >> release_notes.md
-
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          body_path: release_notes.md
+          generate_release_notes: true
+
+      - name: Bump minor version
+        run: |
+          # Read current versions
+          MAJOR=$(grep '^major=' gradle.properties | cut -d'=' -f2)
+          MINOR=$(grep '^minor=' gradle.properties | cut -d'=' -f2)
+
+          # Bump minor version
+          NEW_MINOR=$((MINOR + 1))
+
+          # Update gradle.properties
+          sed -i "s/^minor=.*/minor=${NEW_MINOR}/" gradle.properties
+          sed -i "s/^patch=.*/patch=0/" gradle.properties
+
+          echo "Bumped version to ${MAJOR}.${NEW_MINOR}.0"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: bump version to next development cycle"
+          title: "chore: bump version after release ${{ steps.version.outputs.VERSION }}"
+          body: |
+            Automated version bump after release v${{ steps.version.outputs.VERSION }}.
+
+            This PR increments the minor version for the next development cycle.
+          branch: chore/bump-version-${{ steps.version.outputs.VERSION }}
+          base: main
