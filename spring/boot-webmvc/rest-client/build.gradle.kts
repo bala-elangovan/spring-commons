@@ -4,6 +4,7 @@ plugins {
     kotlin("jvm")
     kotlin("plugin.spring")
     id("io.github.balaelangovan.java-conventions")
+    id("io.github.balaelangovan.spring-test-conventions")
 }
 
 description = "REST client with OAuth support for Spring Boot WebMVC"
