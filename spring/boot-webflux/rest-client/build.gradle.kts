@@ -4,6 +4,7 @@ plugins {
     kotlin("jvm")
     kotlin("plugin.spring")
     id("io.github.balaelangovan.java-conventions")
+    id("io.github.balaelangovan.spring-test-conventions")
 }
 
 description = "Reactive REST client (WebClient) with OAuth support for Spring Boot WebFlux"
